@@ -22,6 +22,7 @@
 	},
 	"private": true,
 	"dependencies": {
+		"country-code-emoji": "^2.3.0",
 		"ws": "^8.18.1"
 	}
 }

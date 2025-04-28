@@ -9,22 +9,33 @@ import OverlayCore from './overlay-core';
 
 const overlay = new OverlayCore();
 let playerId = '';
+let missCount = 0;
 
 overlay.onGameState = (gameState: GameState) => {
 	if (gameState.gameStateChanged == 'Menu') {
 		updatePlayerCard(playerId);
-		document.getElementById('map-card')!.style =
-			'transform: translateX(-100%);transition-timing-function: cubic-bezier(0.4, 0, 1, 1);';
+		document.getElementById('map-card')!.style.transform =
+			'translateX(-100%)';
+		document.getElementById('map-card')!.style.transitionTimingFunction =
+			'cubic-bezier(0.4, 0, 1, 1)';
 		setTimeout(() => {
-			document.getElementById('player-card')!.style =
-				'transform: translateX(0px);transition-timing-function: cubic-bezier(0, 0, 0.2, 1);';
+			document.getElementById('player-card')!.style.transform =
+				'translateX(0px)';
+			document.getElementById(
+				'player-card'
+			)!.style.transitionTimingFunction = 'cubic-bezier(0, 0, 0.2, 1)';
 		}, 1000);
 	} else {
-		document.getElementById('player-card')!.style =
-			'transform: translateX(-100%);transition-timing-function: cubic-bezier(0.4, 0, 1, 1);';
+		document.getElementById('player-card')!.style.transform =
+			'translateX(-100%)';
+		document.getElementById('player-card')!.style.transitionTimingFunction =
+			'cubic-bezier(0.4, 0, 1, 1)';
 		setTimeout(() => {
-			document.getElementById('map-card')!.style =
-				'transform: translateX(0px);transition-timing-function: cubic-bezier(0, 0, 0.2, 1);';
+			document.getElementById('map-card')!.style.transform =
+				'translateX(0px)';
+			document.getElementById(
+				'map-card'
+			)!.style.transitionTimingFunction = 'cubic-bezier(0, 0, 0.2, 1)';
 		}, 1000);
 	}
 };
@@ -138,6 +149,14 @@ overlay.onScore = (score: Score) => {
 		`${(score.scoreEvent.accuracy * 100).toFixed(2)}%`;
 	document.getElementById('miss')!.innerHTML =
 		`${score.scoreEvent.missCount} Miss`;
+
+	if (score.scoreEvent.missCount > missCount) {
+		document.getElementById('map-card')!.style.animation = 'none';
+		document.getElementById('map-card')!.offsetHeight; // Read random property to reset animation
+		document.getElementById('map-card')!.style.animation =
+			'miss 500ms ease-in-out';
+	}
+	missCount = score.scoreEvent.missCount;
 };
 
 overlay.init();

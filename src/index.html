@@ -37,6 +37,27 @@
 					transform: translateX(-100%);
 				}
 			}
+
+			@keyframes miss {
+				0% {
+					transform: translateX(0);
+					box-shadow: none;
+				}
+				25% {
+					transform: translateX(5%);
+					box-shadow: 15px -10px 46px 3px red;
+				}
+				50% {
+					transform: translateX(0%);
+				}
+				75% {
+					transform: translateX(2%);
+				}
+				100% {
+					transform: translateX(0);
+					box-shadow: none;
+				}
+			}
 		</style>
 		<title>Overlay</title>
 	</head>
@@ -154,7 +175,7 @@
 						<div class="flex gap-10 col-span-2 my-auto w-full">
 							<h1
 								id="acc"
-								class="min-w-20"
+								class="min-w-28"
 								>93.92%</h1
 							>
 							<h2
